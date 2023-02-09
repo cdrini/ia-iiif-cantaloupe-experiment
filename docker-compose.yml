@@ -1,0 +1,24 @@
+services:
+  cantaloupe:
+    build: .
+    command: 
+      - java
+      - -Dcantaloupe.config=/cantaloupe/cantaloupe.properties
+      - -jar
+      - /cantaloupe/cantaloupe-4.1.5.war
+    ports:
+      - 8182:8182
+    volumes:
+      - ./cantaloupe.properties:/cantaloupe/cantaloupe.properties
+    networks:
+      - web
+
+  redis:
+    image: redis
+    expose:
+      - 6379
+    networks:
+      - web
+
+networks:
+  web: null
