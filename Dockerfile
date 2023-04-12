@@ -31,7 +31,18 @@ RUN curl --silent --fail -OL https://github.com/medusa-project/cantaloupe/releas
     && chown -R cantaloupe /cantaloupe /var/log/cantaloupe /var/cache/cantaloupe \
     && cp -rs /cantaloupe/deps/Linux-x86-64/* /usr/
 
+# Install Redis
+RUN apt-get update && \
+    apt-get install -y redis-server && \
+    apt-get -qqy autoremove && \
+    apt-get -qqy autoclean && \
+    mkdir -p /var/lib/redis /var/log/redis && \
+    chown -R cantaloupe /var/lib/redis /var/log/redis
+#EXPOSE 6379 # Not exposed
+
 USER cantaloupe
 
+COPY ./entrypoint.sh /entrypoint.sh
 COPY ./cantaloupe.properties /cantaloupe/cantaloupe.properties
-CMD [ "java", "-Dcantaloupe.config=/cantaloupe/cantaloupe.properties", "-jar", "/cantaloupe/cantaloupe-5.0.5.jar" ]
+
+CMD [ "/bin/bash", "/entrypoint.sh" ]
