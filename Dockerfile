@@ -32,3 +32,6 @@ RUN curl --silent --fail -OL https://github.com/medusa-project/cantaloupe/releas
     && cp -rs /cantaloupe/deps/Linux-x86-64/* /usr/
 
 USER cantaloupe
+
+COPY ./cantaloupe.properties /cantaloupe/cantaloupe.properties
+CMD [ "java", "-Dcantaloupe.config=/cantaloupe/cantaloupe.properties", "-jar", "/cantaloupe/cantaloupe-5.0.5.jar" ]

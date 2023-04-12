@@ -1,11 +1,6 @@
 services:
   cantaloupe:
     build: .
-    command: 
-      - java
-      - -Dcantaloupe.config=/cantaloupe/cantaloupe.properties
-      - -jar
-      - /cantaloupe/cantaloupe-5.0.5.jar
     ports:
       - 8182:8182
     volumes:
