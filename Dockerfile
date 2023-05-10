@@ -13,6 +13,7 @@ RUN apt-get update -qy && \
         curl \
         imagemagick \
         libopenjp2-tools \
+        libturbojpeg0-dev \
         ffmpeg \
         unzip \
         default-jre-headless && \
